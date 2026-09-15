@@ -7,6 +7,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from xp import calculate_xp
+from level import calculate_level
 
 
 ROOT = Path(__file__).resolve().parents[2]
