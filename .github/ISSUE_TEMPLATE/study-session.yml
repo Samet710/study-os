@@ -1,0 +1,123 @@
+name: 📚 Çalışma Kaydı
+
+description: Yaptığın bir çalışma oturumunu Study OS'a kaydet.
+
+title: "[STUDY] "
+
+labels:
+  - study-session
+
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📚 Study Session
+
+        Bugünkü çalışmanı kaydet.
+
+        Verileri mümkün olduğunca doğru gir.
+        Study OS bu bilgilerden XP ve istatistiklerini hesaplayacak.
+
+  - type: input
+    id: subject
+    attributes:
+      label: Ders
+      description: Hangi derste çalıştın?
+      placeholder: "Örn: Matematik"
+    validations:
+      required: true
+
+  - type: input
+    id: topic
+    attributes:
+      label: Konu
+      description: Hangi konuda çalıştın?
+      placeholder: "Örn: Parabol"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: study-type
+    attributes:
+      label: Çalışma türü
+      options:
+        - Soru Çözümü
+        - Konu Çalışması
+        - Tekrar
+        - Deneme
+    validations:
+      required: true
+
+  - type: input
+    id: total
+    attributes:
+      label: Toplam soru
+      description: Kaç soru çözdün?
+      placeholder: "Örn: 40"
+    validations:
+      required: true
+
+  - type: input
+    id: correct
+    attributes:
+      label: Doğru
+      description: Kaç doğru yaptın?
+      placeholder: "Örn: 32"
+    validations:
+      required: true
+
+  - type: input
+    id: wrong
+    attributes:
+      label: Yanlış
+      description: Kaç yanlış yaptın?
+      placeholder: "Örn: 8"
+    validations:
+      required: true
+
+  - type: input
+    id: blank
+    attributes:
+      label: Boş
+      description: Kaç soruyu boş bıraktın?
+      placeholder: "Örn: 0"
+      value: "0"
+    validations:
+      required: true
+
+  - type: input
+    id: duration
+    attributes:
+      label: Çalışma süresi
+      description: Dakika cinsinden yaz.
+      placeholder: "Örn: 55"
+    validations:
+      required: true
+
+  - type: input
+    id: pomodoros
+    attributes:
+      label: Pomodoro sayısı
+      description: Kaç Pomodoro yaptın?
+      placeholder: "Örn: 2"
+      value: "0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Zorluk
+      options:
+        - Kolay
+        - Normal
+        - Zor
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        💡 Gönderdiğinde GitHub Actions kaydı otomatik olarak Study OS'a işleyecek.
