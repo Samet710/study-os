@@ -1,0 +1,116 @@
+name: Process Study Data
+
+on:
+
+  push:
+    paths:
+      - "data/events/**"
+      - "core/engine/**"
+
+  issues:
+    types:
+      - opened
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+jobs:
+
+  process:
+
+    if: >
+      github.event_name != 'issues'
+      ||
+      (
+        github.event.issue.user.login == github.repository_owner
+        &&
+        contains(
+          github.event.issue.labels.*.name,
+          'study-session'
+        )
+      )
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Save issue body
+        if: github.event_name == 'issues'
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > /tmp/study_issue.md
+
+      - name: Create event from issue
+        if: github.event_name == 'issues'
+        run: |
+          python core/engine/create_event.py \
+            --body /tmp/study_issue.md \
+            --event-id "issue-${{ github.event.issue.number }}" \
+            --timestamp "${{ github.event.issue.created_at }}"
+
+      - name: Process all events
+        working-directory: core/engine
+        run: |
+          python process_events.py
+
+      - name: Save generated statistics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add app/data/stats.json
+          git add data/events/
+
+          if git diff --cached --quiet; then
+            echo "Commit edilecek değişiklik yok."
+          else
+            git commit -m "Update study data"
+            git push
+          fi
+
+      - name: Confirm study issue
+        if: >
+          github.event_name == 'issues'
+          &&
+          github.event.issue.user.login == github.repository_owner
+          &&
+          contains(
+            github.event.issue.labels.*.name,
+            'study-session'
+          )
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment \
+            "${{ github.event.issue.number }}" \
+            --body "✅ Çalışma kaydın Study OS tarafından işlendi."
+
+          gh issue close \
+            "${{ github.event.issue.number }}" \
+            --reason completed
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "./app"
+
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
