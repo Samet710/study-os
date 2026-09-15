@@ -1,25 +1,52 @@
 {
-  "generated_at": "2026-09-16T00:22:48.143195+03:00",
+  "generated_at": "2026-09-16T00:27:04.113327+03:00",
   "today": "2026-09-16",
   "daily_goal": 50,
   "totals": {
-    "questions": 0,
-    "correct": 0,
-    "wrong": 0,
-    "blank": 0,
-    "minutes": 0,
-    "xp": 0,
-    "accuracy": 0,
+    "questions": 20,
+    "correct": 15,
+    "wrong": 3,
+    "blank": 2,
+    "minutes": 30,
+    "xp": 210,
+    "accuracy": 75.0,
     "level": 1
   },
   "today_stats": {
-    "questions": 0,
-    "correct": 0,
-    "minutes": 0,
-    "xp": 0
+    "questions": 20,
+    "correct": 15,
+    "minutes": 30,
+    "xp": 210
   },
-  "streak": 0,
-  "subjects": {},
-  "daily": {},
-  "recent_events": []
+  "streak": 1,
+  "subjects": {
+    "Matematik": {
+      "questions": 20,
+      "correct": 15,
+      "wrong": 3,
+      "minutes": 30,
+      "xp": 210,
+      "accuracy": 75.0
+    }
+  },
+  "daily": {
+    "2026-09-16": {
+      "questions": 20,
+      "correct": 15,
+      "minutes": 30,
+      "xp": 210
+    }
+  },
+  "recent_events": [
+    {
+      "event_id": "issue-4",
+      "timestamp": "2026-09-15T21:26:56Z",
+      "subject": "Matematik",
+      "topic": "Fonksiyonlar",
+      "questions": 20,
+      "correct": 15,
+      "minutes": 30,
+      "xp": 210
+    }
+  ]
 }

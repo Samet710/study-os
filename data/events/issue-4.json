@@ -1,0 +1,19 @@
+{
+  "event_id": "issue-4",
+  "event_type": "question_session",
+  "timestamp": "2026-09-15T21:26:56Z",
+  "subject": "Matematik",
+  "topic": "Fonksiyonlar",
+  "study_type": "Soru Çözümü",
+  "questions": {
+    "total": 20,
+    "correct": 15,
+    "wrong": 3,
+    "blank": 2
+  },
+  "duration_minutes": 30,
+  "metadata": {
+    "pomodoros": 1,
+    "difficulty": "Normal"
+  }
+}
