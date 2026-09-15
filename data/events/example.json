@@ -1,0 +1,22 @@
+{
+  "event_id": "example-001",
+  "event_type": "question_session",
+  "timestamp": "2026-09-15T20:00:00+03:00",
+
+  "subject": "Matematik",
+  "topic": "Parabol",
+
+  "questions": {
+    "total": 30,
+    "correct": 24,
+    "wrong": 6,
+    "blank": 0
+  },
+
+  "duration_minutes": 50,
+
+  "metadata": {
+    "pomodoros": 1,
+    "difficulty": "normal"
+  }
+}
