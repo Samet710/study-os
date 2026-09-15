@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0b0d12;
+
+    color: white;
+
+    font-family:
+        Arial,
+        sans-serif;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+p {
+    color: #aaa;
+    font-size: 18px;
+}
