@@ -1,0 +1,30 @@
+name: Test Study Engine
+
+on:
+
+  push:
+    paths:
+      - "core/**"
+      - "data/**"
+
+  workflow_dispatch:
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Run XP test
+        working-directory: core/engine
+        run: python test_xp.py
