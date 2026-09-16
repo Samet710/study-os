@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from level import calculate_level
 from xp import calculate_xp
 
 
@@ -40,6 +41,7 @@ def load_events() -> list[dict]:
             continue
 
         try:
+
             data = json.loads(
                 path.read_text(
                     encoding="utf-8"
@@ -124,6 +126,7 @@ def add_optional_value(
     key: str,
     value: int | None,
 ) -> None:
+
     """
     Bilinen sayısal değerleri toplar.
 
@@ -141,6 +144,7 @@ def calculate_accuracy(
     correct: int | None,
     wrong: int | None,
 ) -> float | None:
+
     """
     Doğru ve yanlış bilgileri biliniyorsa
     doğruluk oranını hesaplar.
@@ -374,6 +378,7 @@ def build_statistics(
     #
     # Sadece hem doğru hem yanlış bilgisi
     # bulunan kayıtlar üzerinden hesaplanır.
+
     known_correct = 0
     known_wrong = 0
 
@@ -421,6 +426,7 @@ def build_statistics(
         )
 
         subjects[name] = {
+
             "questions": data[
                 "questions"
             ],
@@ -469,6 +475,7 @@ def build_statistics(
     )
 
     today_stats = {
+
         "questions": today_data[
             "questions"
         ],
@@ -492,10 +499,11 @@ def build_statistics(
         key=lambda event: event[
             "timestamp"
         ],
-        reverse=True,
+        reverse=True
     )
 
     return {
+
         "generated_at": datetime.now(
             TIMEZONE
         ).isoformat(),
@@ -505,6 +513,7 @@ def build_statistics(
         "daily_goal": 50,
 
         "totals": {
+
             "questions": total_questions,
 
             "correct": (
@@ -535,7 +544,9 @@ def build_statistics(
 
             "accuracy": accuracy,
 
-            "level": 1,
+            "level": calculate_level(
+                total_xp
+            ),
         },
 
         "today_stats": today_stats,
