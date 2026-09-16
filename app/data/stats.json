@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-09-16T09:53:11.953227+03:00",
+  "generated_at": "2026-09-16T09:55:11.132434+03:00",
   "today": "2026-09-16",
   "daily_goal": 50,
   "totals": {
-    "questions": 20,
-    "correct": 15,
-    "wrong": 3,
+    "questions": 40,
+    "correct": 27,
+    "wrong": 11,
     "blank": 2,
-    "minutes": 30,
-    "xp": 210,
-    "accuracy": 83.3,
+    "minutes": 60,
+    "xp": 410,
+    "accuracy": 71.1,
     "level": 1
   },
   "today_stats": {
-    "questions": 20,
-    "correct": 15,
-    "minutes": 30,
-    "xp": 210
+    "questions": 40,
+    "correct": 27,
+    "minutes": 60,
+    "xp": 410
   },
   "streak": 1,
   "subjects": {
@@ -28,19 +28,41 @@
       "minutes": 30,
       "xp": 210,
       "accuracy": 83.3
+    },
+    "Fizik": {
+      "questions": 20,
+      "correct": 12,
+      "wrong": 8,
+      "blank": 0,
+      "minutes": 30,
+      "xp": 200,
+      "accuracy": 60.0
     }
   },
   "daily": {
     "2026-09-16": {
-      "questions": 20,
-      "correct": 15,
-      "minutes": 30,
-      "xp": 210,
-      "correct_known": 1,
-      "minutes_known": 1
+      "questions": 40,
+      "correct": 27,
+      "minutes": 60,
+      "xp": 410,
+      "correct_known": 2,
+      "minutes_known": 2
     }
   },
   "recent_events": [
+    {
+      "event_id": "issue-6",
+      "timestamp": "2026-09-16T06:54:58Z",
+      "subject": "Fizik",
+      "topic": "Optik",
+      "study_type": "Soru Çözümü",
+      "questions": 20,
+      "correct": 12,
+      "wrong": 8,
+      "blank": 0,
+      "minutes": 30,
+      "xp": 200
+    },
     {
       "event_id": "issue-4",
       "timestamp": "2026-09-15T21:26:56Z",

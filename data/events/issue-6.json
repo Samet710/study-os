@@ -1,0 +1,19 @@
+{
+  "event_id": "issue-6",
+  "event_type": "question_session",
+  "timestamp": "2026-09-16T06:54:58Z",
+  "subject": "Fizik",
+  "topic": "Optik",
+  "study_type": "Soru Çözümü",
+  "questions": {
+    "total": 20,
+    "correct": 12,
+    "wrong": 8,
+    "blank": 0
+  },
+  "duration_minutes": 30,
+  "metadata": {
+    "pomodoros": 1,
+    "difficulty": "Normal"
+  }
+}
