@@ -1,48 +1,7 @@
 (() => {
     "use strict";
 
-    function loadStyles() {
-        if (
-            document.querySelector(
-                "[data-study-os-navigation]"
-            )
-        ) return;
-
-        const link =
-            document.createElement("link");
-
-        link.rel = "stylesheet";
-        link.href =
-            `navigation.css?v=${Date.now()}`;
-
-        link.dataset.studyOsNavigation =
-            "true";
-
-        document.head.appendChild(link);
-    }
-
-
-    function findPanels() {
-        const panels =
-            [...document.querySelectorAll(
-                ".dashboard > .panel"
-            )];
-
-        return {
-            daily: panels[0] || null,
-
-            recent:
-                panels.find(panel =>
-                    panel.textContent.includes(
-                        "Son Çalışmalar"
-                    )
-                ) || null
-        };
-    }
-
-
-    function createNavigation() {
-
+    function createNav() {
         if (
             document.querySelector(
                 ".study-os-bottom-nav"
@@ -56,177 +15,164 @@
             "study-os-bottom-nav";
 
         nav.innerHTML = `
-
             <button
-                class="study-os-nav-item active"
+                class="nav-item active"
                 data-tab="home"
             >
-                <i data-lucide="house"></i>
-                <span>Ana Sayfa</span>
+                <span>⌂</span>
+                <small>Ana Sayfa</small>
             </button>
 
             <button
-                class="study-os-nav-item"
+                class="nav-item"
                 data-tab="progress"
             >
-                <i data-lucide="chart-no-axes-combined"></i>
-                <span>İlerleme</span>
+                <span>◔</span>
+                <small>İlerleme</small>
             </button>
 
             <button
-                class="study-os-nav-item"
+                class="nav-item"
                 data-tab="achievements"
             >
-                <i data-lucide="trophy"></i>
-                <span>Başarımlar</span>
+                <span>♜</span>
+                <small>Başarımlar</small>
             </button>
 
             <button
-                class="study-os-nav-item"
+                class="nav-item"
                 data-tab="settings"
             >
-                <i data-lucide="settings"></i>
-                <span>Ayarlar</span>
+                <span>⚙</span>
+                <small>Ayarlar</small>
             </button>
-
         `;
 
         document.body.appendChild(nav);
 
         nav.querySelectorAll(
-            ".study-os-nav-item"
+            ".nav-item"
         ).forEach(button => {
 
             button.addEventListener(
                 "click",
                 () => {
-                    switchTab(
+                    changeTab(
                         button.dataset.tab
                     );
                 }
             );
 
         });
-
-        if (
-            window.lucide &&
-            lucide.createIcons
-        ) {
-            lucide.createIcons();
-        }
     }
 
 
-    function getAchievement() {
-        return document.querySelector(
-            "#achievementSection"
-        );
-    }    function showElement(
+    function sections() {
+        return {
+            hero:
+                document.querySelector(
+                    ".hero"
+                ),
+
+            stats:
+                document.querySelector(
+                    ".stats-grid"
+                ),
+
+            charts:
+                document.querySelector(
+                    ".charts-grid"
+                ),
+
+            message:
+                document.querySelector(
+                    ".message-panel"
+                ),
+
+            daily:
+                document.querySelector(
+                    ".charts-grid"
+                )?.previousElementSibling,
+
+            recent:
+                [...document.querySelectorAll(
+                    ".panel"
+                )].find(panel =>
+                    panel.textContent.includes(
+                        "Son Çalışmalar"
+                    )
+                ),
+
+            achievements:
+                document.querySelector(
+                    "#achievementSection"
+                )
+        };
+    }    function visible(
         element,
-        visible
+        value
     ) {
         if (!element) return;
 
         element.classList.toggle(
-            "study-os-tab-hidden",
-            !visible
+            "nav-hidden",
+            !value
         );
     }
 
 
-    function switchTab(tab) {
+    function changeTab(tab) {
 
-        const dashboard =
-            document.querySelector(
-                ".dashboard"
-            );
-
-        if (!dashboard) return;
-
-        const hero =
-            document.querySelector(
-                ".hero"
-            );
-
-        const stats =
-            document.querySelector(
-                ".stats-grid"
-            );
-
-        const level =
-            document.querySelector(
-                "#levelProgressPanel"
-            );
-
-        const panels =
-            findPanels();
-
-        const charts =
-            document.querySelector(
-                ".charts-grid"
-            );
-
-        const message =
-            document.querySelector(
-                ".message-panel"
-            );
-
-        const achievement =
-            getAchievement();
+        const s = sections();
 
 
-        showElement(
-            hero,
+        visible(
+            s.hero,
             tab === "home"
         );
 
-        showElement(
-            stats,
+        visible(
+            s.stats,
             tab === "home"
         );
 
-        showElement(
-            level,
-            tab === "home"
-        );
-
-        showElement(
-            panels.daily,
+        visible(
+            s.daily,
             tab === "home"
         );
 
 
-        showElement(
-            charts,
+        visible(
+            s.charts,
             tab === "progress"
         );
 
-        showElement(
-            message,
+        visible(
+            s.message,
             tab === "progress"
         );
 
-        showElement(
-            panels.recent,
+        visible(
+            s.recent,
             tab === "progress"
         );
 
-        showElement(
-            achievement,
+
+        visible(
+            s.achievements,
             tab === "achievements"
         );
 
 
         document
             .querySelectorAll(
-                ".study-os-nav-item"
+                ".nav-item"
             )
-            .forEach(button => {
+            .forEach(item => {
 
-                button.classList.toggle(
+                item.classList.toggle(
                     "active",
-                    button.dataset.tab ===
-                    tab
+                    item.dataset.tab === tab
                 );
 
             });
@@ -236,7 +182,7 @@
 
             const settings =
                 document.querySelector(
-                    ".study-os-settings-button"
+                    ".settings-trigger"
                 );
 
             if (settings) {
@@ -246,6 +192,7 @@
             return;
         }
 
+
         window.scrollTo({
             top: 0,
             behavior: "smooth"
@@ -253,30 +200,32 @@
     }
 
 
-    function observeAchievements() {
+    function watchAchievements() {
 
         const observer =
             new MutationObserver(() => {
 
-                const nav =
-                    document.querySelector(
-                        ".study-os-bottom-nav"
-                    );
-
-                if (!nav) return;
-
                 const achievement =
-                    getAchievement();
+                    document.querySelector(
+                        "#achievementSection"
+                    );
 
                 if (
                     achievement &&
-                    !achievement.dataset.navReady
+                    achievement.dataset
+                        .navigationReady
                 ) {
-                    achievement.dataset.navReady =
+                    return;
+                }
+
+                if (achievement) {
+                    achievement.dataset
+                        .navigationReady =
                         "true";
                 }
 
             });
+
 
         observer.observe(
             document.body,
@@ -288,17 +237,29 @@
     }
 
 
+    function styles() {
+
+        const link =
+            document.createElement("link");
+
+        link.rel = "stylesheet";
+
+        link.href =
+            "navigation.css?v=1";
+
+        document.head.appendChild(link);
+    }
+
+
     function start() {
 
-        loadStyles();
-
-        createNavigation();
-
-        observeAchievements();
+        styles();
+        createNav();
+        watchAchievements();
 
         setTimeout(() => {
-            switchTab("home");
-        }, 300);
+            changeTab("home");
+        }, 500);
     }
 
 
