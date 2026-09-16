@@ -316,3 +316,321 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Study OS</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+    ></script>
+
+</head>
+
+
+<body>
+
+<main class="dashboard">
+
+
+    <header class="hero">
+
+        <div>
+
+            <p class="eyebrow">
+                STUDY OS
+            </p>
+
+            <h1>
+                Bugünkü Yolculuğun
+            </h1>
+
+            <p class="subtitle">
+                Küçük adımlar. Büyük ilerleme.
+            </p>
+
+        </div>
+
+
+        <a
+            id="addSession"
+            class="primary-button"
+            href="#"
+        >
+            + Çalışma Ekle
+        </a>
+
+    </header>
+
+
+    <section class="stats-grid">
+
+
+        <article
+            class="stat-card purple"
+        >
+
+            <span>
+                XP
+            </span>
+
+            <strong id="xp">
+                0
+            </strong>
+
+            <small>
+                Toplam deneyim
+            </small>
+
+        </article>
+
+
+        <article
+            class="stat-card blue"
+        >
+
+            <span>
+                LEVEL
+            </span>
+
+            <strong id="level">
+                1
+            </strong>
+
+            <small>
+                Genel seviye
+            </small>
+
+        </article>
+
+
+        <article
+            class="stat-card green"
+        >
+
+            <span>
+                SORULAR
+            </span>
+
+            <strong id="questions">
+                0
+            </strong>
+
+            <small>
+                Toplam çözülen
+            </small>
+
+        </article>
+
+
+        <article
+            class="stat-card orange"
+        >
+
+            <span>
+                STREAK
+            </span>
+
+            <strong id="streak">
+                0 🔥
+            </strong>
+
+            <small>
+                Günlük seri
+            </small>
+
+        </article>
+
+
+    </section>
+
+
+    <section class="panel">
+
+        <div class="panel-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    TODAY
+                </p>
+
+                <h2>
+                    Günlük İlerleme
+                </h2>
+
+            </div>
+
+
+            <strong
+                id="todayPercentage"
+            >
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                id="todayProgress"
+                class="progress-fill"
+            ></div>
+
+        </div>
+
+
+        <div class="goal-row">
+
+            <span>
+
+                <b id="todayQuestions">
+                    0
+                </b>
+
+                /
+
+                <b id="dailyGoal">
+                    50
+                </b>
+
+                soru
+
+            </span>
+
+
+            <span id="todayMinutes">
+                0 dk
+            </span>
+
+        </div>
+
+    </section>    <section class="charts-grid">
+
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ACTIVITY
+                    </p>
+
+                    <h2>
+                        Son 7 Gün
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="weeklyChart"
+                class="weekly-chart"
+            ></div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        SUBJECTS
+                    </p>
+
+                    <h2>
+                        Dersler
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="subjectChart"
+                class="subject-chart"
+            ></div>
+
+        </div>
+
+
+    </section>
+
+
+    <section
+        class="panel message-panel"
+    >
+
+        <p class="eyebrow">
+            STUDY OS
+        </p>
+
+        <h2 id="message">
+            Bugünün hikâyesini
+            sen yazacaksın.
+        </h2>
+
+    </section>
+
+
+    <section class="panel">
+
+        <div class="panel-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    RECENT
+                </p>
+
+                <h2>
+                    Son Çalışmalar
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="recentEvents"
+            class="recent-events"
+        ></div>
+
+    </section>
+
+
+</main><script src="app.js"></script>
+
+<script src="level-progress.js"></script>
+
+
+<script
+    src="study-os-features.js?v=3"
+></script></body>
+
+
+</html>
