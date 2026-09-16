@@ -1,0 +1,188 @@
+.study-os-settings-button {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid
+        rgba(255,255,255,.2);
+    border-radius: 14px;
+    background:
+        rgba(255,255,255,.1);
+    backdrop-filter: blur(18px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.study-os-settings-button svg {
+    width: 19px;
+    height: 19px;
+}
+
+.study-os-settings-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 18px;
+    opacity: 0;
+    pointer-events: none;
+    background:
+        rgba(10,10,20,.2);
+    backdrop-filter: blur(0);
+    z-index: 1000;
+    transition:
+        opacity .3s ease,
+        backdrop-filter .3s ease;
+}
+
+.study-os-settings-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: blur(10px);
+}
+
+.study-os-settings-panel {
+    width: min(430px,100%);
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    border-radius: 28px;
+    background:
+        rgba(25,25,35,.84);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.3);
+    transform:
+        translateX(30px);
+    transition:
+        transform .35s ease;
+}
+
+.study-os-settings-overlay.is-visible
+.study-os-settings-panel {
+    transform:
+        translateX(0);
+}
+
+.study-os-settings-header {
+    padding: 26px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.study-os-settings-header small {
+    opacity: .45;
+    letter-spacing: .15em;
+}
+
+.study-os-settings-header h2 {
+    margin: 5px 0 0;
+}
+
+.study-os-settings-close {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 12px;
+    background:
+        rgba(255,255,255,.08);
+    color: inherit;
+}
+
+.study-os-settings-content {
+    padding: 0 20px 25px;
+}
+
+.study-os-settings-content section {
+    padding: 18px 6px;
+}
+
+.study-os-settings-content p {
+    opacity: .5;
+    font-size: 12px;
+}
+
+.study-os-theme-modes {
+    display: grid;
+    gap: 8px;
+}
+
+.study-os-option {
+    width: 100%;
+    min-height: 64px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns:
+        28px 1fr 20px;
+    gap: 12px;
+    align-items: center;
+    border: 1px solid
+        rgba(255,255,255,.08);
+    border-radius: 16px;
+    background:
+        rgba(255,255,255,.04);
+    color: inherit;
+    text-align: left;
+}
+
+.study-os-option span {
+    display: flex;
+    flex-direction: column;
+}
+
+.study-os-option small {
+    margin-top: 3px;
+    opacity: .5;
+}.study-os-option em {
+    opacity: 0;
+}
+
+.study-os-option.is-selected {
+    border-color:
+        rgba(150,125,255,.55);
+    background:
+        rgba(130,105,255,.12);
+}
+
+.study-os-option.is-selected em {
+    opacity: 1;
+}
+
+.study-os-option svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 600px) {
+
+    .study-os-settings-button {
+        top: 14px;
+        right: 14px;
+    }
+
+    .study-os-settings-overlay {
+        align-items: flex-end;
+        padding: 10px;
+    }
+
+    .study-os-settings-panel {
+        width: 100%;
+        max-height:
+            calc(100vh - 20px);
+        border-radius: 25px;
+        transform:
+            translateY(30px);
+    }
+
+    .study-os-settings-overlay.is-visible
+    .study-os-settings-panel {
+        transform:
+            translateY(0);
+    }
+
+}
