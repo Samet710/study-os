@@ -1,0 +1,687 @@
+/* =========================================================
+   STUDY OS
+   THEME ENGINE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BASE
+   --------------------------------------------------------- */
+
+body {
+    transition:
+        background-color 900ms ease,
+        color 600ms ease;
+}
+
+
+/* ---------------------------------------------------------
+   DEFAULT
+   --------------------------------------------------------- */
+
+body.theme-default {
+    --study-os-theme-opacity: 0;
+}
+
+
+/* ---------------------------------------------------------
+   DAYLIGHT
+   --------------------------------------------------------- */
+
+body.theme-daylight {
+    --study-os-theme-opacity: 0.08;
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT
+   --------------------------------------------------------- */
+
+body.theme-night {
+    --study-os-theme-opacity: 0.18;
+}
+
+
+/* ---------------------------------------------------------
+   SPRING
+   --------------------------------------------------------- */
+
+body.theme-spring {
+    --study-os-theme-opacity: 0.09;
+}
+
+
+/* ---------------------------------------------------------
+   SUMMER
+   --------------------------------------------------------- */
+
+body.theme-summer {
+    --study-os-theme-opacity: 0.10;
+}
+
+
+/* ---------------------------------------------------------
+   AUTUMN
+   --------------------------------------------------------- */
+
+body.theme-autumn {
+    --study-os-theme-opacity: 0.11;
+}
+
+
+/* ---------------------------------------------------------
+   WINTER
+   --------------------------------------------------------- */
+
+body.theme-winter {
+    --study-os-theme-opacity: 0.12;
+}
+
+
+/* =========================================================
+   ATMOSPHERE ROOT
+   ========================================================= */
+
+.study-os-atmosphere {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 0;
+
+    opacity: 0;
+
+    animation:
+        studyOsAtmosphereFade
+        1.2s ease
+        forwards;
+}
+
+
+/*
+ * İçerik atmosferin üzerinde kalmalı.
+ */
+
+body > *:not(#studyOsAtmosphere) {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   RAIN
+   ========================================================= */
+
+.atmosphere-rain {
+    opacity: 0.32;
+}
+
+
+.rain-drop {
+    position: absolute;
+
+    top: -10%;
+
+    left: var(--x);
+
+    width: 1px;
+
+    height: 36px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(
+                255,
+                255,
+                255,
+                0.30
+            )
+        );
+
+    opacity: 0.28;
+
+    transform:
+        rotate(10deg);
+
+    animation:
+        rainFall
+        var(--duration)
+        linear
+        var(--delay)
+        infinite;
+}
+
+
+/* =========================================================
+   SNOW
+   ========================================================= */
+
+.atmosphere-snow {
+    opacity: 0.40;
+}
+
+
+.snow-flake {
+    position: absolute;
+
+    top: -10%;
+
+    left: var(--x);
+
+    width: var(--size);
+
+    height: var(--size);
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.70
+        );
+
+    filter:
+        blur(
+            0.3px
+        );
+
+    animation:
+        snowFall
+        var(--duration)
+        linear
+        var(--delay)
+        infinite;
+}
+
+
+/* =========================================================
+   SUN
+   ========================================================= */
+
+.atmosphere-sunny {
+    opacity: 0.22;
+}
+
+
+.weather-sun-glow {
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    right: -160px;
+
+    top: -170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(
+                255,
+                220,
+                130,
+                0.18
+            ) 0%,
+            rgba(
+                255,
+                220,
+                130,
+                0.06
+            ) 35%,
+            transparent 70%
+        );
+
+    filter:
+        blur(18px);
+
+    animation:
+        sunBreath
+        7s ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   CLOUDY
+   ========================================================= */
+
+.atmosphere-cloudy {
+    opacity: 0.16;
+}
+
+
+.weather-cloud-layer {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at 15% 10%,
+            rgba(
+                255,
+                255,
+                255,
+                0.05
+            ),
+            transparent 42%
+        ),
+
+        radial-gradient(
+            ellipse at 85% 22%,
+            rgba(
+                255,
+                255,
+                255,
+                0.04
+            ),
+            transparent 40%
+        );
+
+    animation:
+        cloudDrift
+        18s ease-in-out
+        infinite alternate;
+}
+
+
+/* =========================================================
+   STORM
+   ========================================================= */
+
+.atmosphere-storm {
+    opacity: 0.18;
+}
+
+
+.weather-storm-layer {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            115deg,
+            rgba(
+                50,
+                55,
+                80,
+                0.08
+            ),
+            transparent 50%
+        );
+}
+
+
+/* =========================================================
+   WEATHER HOOKS
+   ========================================================= */
+
+body.weather-rain {
+    --study-os-weather-strength: 1;
+}
+
+
+body.weather-snow {
+    --study-os-weather-strength: 1;
+}
+
+
+body.weather-sunny {
+    --study-os-weather-strength: 1;
+}
+
+
+body.weather-cloudy {
+    --study-os-weather-strength: 1;
+}
+
+
+body.weather-storm {
+    --study-os-weather-strength: 1;
+}
+
+
+/* =========================================================
+   NIGHT ATMOSPHERE
+   ========================================================= */
+
+body.theme-night::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(
+                130,
+                145,
+                255,
+                0.08
+            ),
+            transparent 36%
+        );
+
+    opacity: 0.8;
+
+    animation:
+        nightBreath
+        9s ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   AUTUMN ATMOSPHERE
+   ========================================================= */
+
+body.theme-autumn::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 15%,
+            rgba(
+                255,
+                190,
+                100,
+                0.06
+            ),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(
+                220,
+                110,
+                70,
+                0.04
+            ),
+            transparent 38%
+        );
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   WINTER ATMOSPHERE
+   ========================================================= */
+
+body.theme-winter::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(
+                200,
+                220,
+                255,
+                0.07
+            ),
+            transparent 42%
+        );
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   SPRING ATMOSPHERE
+   ========================================================= */
+
+body.theme-spring::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 12% 20%,
+            rgba(
+                180,
+                235,
+                205,
+                0.06
+            ),
+            transparent 38%
+        );
+
+}
+
+
+/* =========================================================
+   SUMMER ATMOSPHERE
+   ========================================================= */
+
+body.theme-summer::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 75% 5%,
+            rgba(
+                255,
+                225,
+                150,
+                0.08
+            ),
+            transparent 38%
+        );
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes studyOsAtmosphereFade {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes rainFall {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                -10vh,
+                0
+            )
+            rotate(10deg);
+    }
+
+    100% {
+        transform:
+            translate3d(
+                -4vw,
+                120vh,
+                0
+            )
+            rotate(10deg);
+    }
+
+}
+
+
+@keyframes snowFall {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                -10vh,
+                0
+            );
+    }
+
+    50% {
+        transform:
+            translate3d(
+                3vw,
+                50vh,
+                0
+            );
+    }
+
+    100% {
+        transform:
+            translate3d(
+                -2vw,
+                120vh,
+                0
+            );
+    }
+
+}
+
+
+@keyframes sunBreath {
+
+    0% {
+        transform:
+            scale(0.96);
+
+        opacity: 0.65;
+    }
+
+    50% {
+        transform:
+            scale(1.04);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            scale(0.96);
+
+        opacity: 0.65;
+    }
+
+}
+
+
+@keyframes cloudDrift {
+
+    from {
+        transform:
+            translateX(
+                -1%
+            );
+    }
+
+    to {
+        transform:
+            translateX(
+                1%
+            );
+    }
+
+}
+
+
+@keyframes nightBreath {
+
+    0% {
+        opacity: 0.65;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.65;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    .study-os-atmosphere,
+    .weather-particle,
+    .weather-sun-glow,
+    .weather-cloud-layer,
+    body::before {
+
+        animation: none !important;
+
+    }
+
+}
