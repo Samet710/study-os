@@ -5,18 +5,26 @@
         "achievements.js",
         "themes.js",
         "settings.js",
-        "effects.js"
+        "effects.js",
+        "navigation.js"
     ];
 
     files.forEach(file => {
+
         const script =
-            document.createElement("script");
+            document.createElement(
+                "script"
+            );
 
         script.src =
             `${file}?v=${Date.now()}`;
 
         script.async = false;
 
-        document.body.appendChild(script);
+        document.body.appendChild(
+            script
+        );
+
     });
+
 })();
