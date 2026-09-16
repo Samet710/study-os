@@ -42,6 +42,25 @@ function setupAddSessionButton() {
 }
 
 
+function cleanOptionalValue(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        value === "null" ||
+        value === "undefined"
+    ) {
+
+        return "";
+
+    }
+
+    return String(value).trim();
+
+}
+
+
 function renderStats(data) {
 
     const totals =
@@ -483,8 +502,28 @@ function renderRecentEvents(
                     "strong"
                 );
 
-            title.textContent =
-                `${event.subject} · ${event.topic}`;
+            const subject =
+                cleanOptionalValue(
+                    event.subject
+                );
+
+            const topic =
+                cleanOptionalValue(
+                    event.topic
+                );
+
+
+            if (topic) {
+
+                title.textContent =
+                    `${subject} · ${topic}`;
+
+            } else {
+
+                title.textContent =
+                    subject;
+
+            }
 
 
             const info =
@@ -492,8 +531,29 @@ function renderRecentEvents(
                     "span"
                 );
 
-            info.textContent =
-                `${event.questions} soru · ${event.minutes} dk`;
+
+            const questionCount =
+                cleanOptionalValue(
+                    event.questions
+                );
+
+            const minutes =
+                cleanOptionalValue(
+                    event.minutes
+                );
+
+
+            if (minutes) {
+
+                info.textContent =
+                    `${questionCount} soru · ${minutes} dk`;
+
+            } else {
+
+                info.textContent =
+                    `${questionCount} soru`;
+
+            }
 
 
             main.appendChild(
@@ -591,9 +651,11 @@ async function loadStats() {
 
 
         if (!response.ok) {
+
             throw new Error(
                 "Stats dosyası okunamadı."
             );
+
         }
 
 
