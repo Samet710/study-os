@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T09:52:31.403242+03:00",
+  "generated_at": "2026-09-16T09:53:11.953227+03:00",
   "today": "2026-09-16",
   "daily_goal": 50,
   "totals": {
@@ -9,7 +9,7 @@
     "blank": 2,
     "minutes": 30,
     "xp": 210,
-    "accuracy": 75.0,
+    "accuracy": 83.3,
     "level": 1
   },
   "today_stats": {
@@ -24,9 +24,10 @@
       "questions": 20,
       "correct": 15,
       "wrong": 3,
+      "blank": 2,
       "minutes": 30,
       "xp": 210,
-      "accuracy": 75.0
+      "accuracy": 83.3
     }
   },
   "daily": {
@@ -34,7 +35,9 @@
       "questions": 20,
       "correct": 15,
       "minutes": 30,
-      "xp": 210
+      "xp": 210,
+      "correct_known": 1,
+      "minutes_known": 1
     }
   },
   "recent_events": [
@@ -43,8 +46,11 @@
       "timestamp": "2026-09-15T21:26:56Z",
       "subject": "Matematik",
       "topic": "Fonksiyonlar",
+      "study_type": "Soru Çözümü",
       "questions": 20,
       "correct": 15,
+      "wrong": 3,
+      "blank": 2,
       "minutes": 30,
       "xp": 210
     }
