@@ -8,19 +8,40 @@ from pathlib import Path
 
 FIELD_MAP = {
     "Ders": "subject",
-    "Konu": "topic",
-    "Çalışma türü": "study_type",
     "Toplam soru": "total",
+    "Konu": "topic",
     "Doğru": "correct",
     "Yanlış": "wrong",
-    "Boş": "blank",
-    "Çalışma süresi": "duration",
-    "Pomodoro sayısı": "pomodoros",
+    "Süre": "duration",
+    "Pomodoro": "pomodoros",
+    "Çalışma türü": "study_type",
     "Zorluk": "difficulty",
 }
 
 
+def normalize_label(label: str) -> str:
+    """
+    Issue form alanlarının başındaki emoji ve boşlukları kaldırır.
+
+    Örnek:
+        "📚 Ders" -> "Ders"
+        "🔢 Toplam soru" -> "Toplam soru"
+    """
+
+    return re.sub(
+        r"^[^\wÇĞİÖŞÜçğıöşü]+",
+        "",
+        label.strip(),
+    ).strip()
+
+
 def parse_issue_body(body: str) -> dict:
+    """
+    GitHub Issue Form tarafından oluşturulan Markdown gövdesini okur.
+
+    Boş bırakılan alanlar boş string olarak döner.
+    """
+
     pattern = re.compile(
         r"^###\s+(.+?)\s*\n+([\s\S]*?)(?=^###\s+|\Z)",
         re.MULTILINE,
@@ -29,11 +50,12 @@ def parse_issue_body(body: str) -> dict:
     values = {}
 
     for match in pattern.finditer(body):
-        label = match.group(1).strip()
+        raw_label = match.group(1).strip()
+        label = normalize_label(raw_label)
+
         value = match.group(2).strip()
 
-        if value:
-            values[label] = value
+        values[label] = value
 
     result = {}
 
@@ -43,9 +65,53 @@ def parse_issue_body(body: str) -> dict:
     return result
 
 
-def to_int(value: str, field_name: str) -> int:
+def optional_int(
+    value: str,
+    field_name: str,
+) -> int | None:
+    """
+    İsteğe bağlı sayı alanını dönüştürür.
+
+    Alan boşsa None döner.
+    """
+
+    value = value.strip()
+
+    if not value:
+        return None
+
     try:
-        number = int(value.strip())
+        number = int(value)
+    except ValueError as exc:
+        raise ValueError(
+            f"{field_name} sayı olmalı: {value}"
+        ) from exc
+
+    if number < 0:
+        raise ValueError(
+            f"{field_name} negatif olamaz: {value}"
+        )
+
+    return number
+
+
+def required_int(
+    value: str,
+    field_name: str,
+) -> int:
+    """
+    Zorunlu sayı alanını dönüştürür.
+    """
+
+    value = value.strip()
+
+    if not value:
+        raise ValueError(
+            f"{field_name} boş bırakılamaz."
+        )
+
+    try:
+        number = int(value)
     except ValueError as exc:
         raise ValueError(
             f"{field_name} sayı olmalı: {value}"
@@ -65,33 +131,85 @@ def build_event(
     timestamp: str,
 ) -> dict:
 
-    total = to_int(values["total"], "Toplam soru")
-    correct = to_int(values["correct"], "Doğru")
-    wrong = to_int(values["wrong"], "Yanlış")
-    blank = to_int(values["blank"], "Boş")
+    subject = values["subject"].strip()
 
-    duration = to_int(
+    if not subject:
+        raise ValueError(
+            "Ders boş bırakılamaz."
+        )
+
+    total = required_int(
+        values["total"],
+        "Toplam soru",
+    )
+
+    correct = optional_int(
+        values["correct"],
+        "Doğru",
+    )
+
+    wrong = optional_int(
+        values["wrong"],
+        "Yanlış",
+    )
+
+    duration = optional_int(
         values["duration"],
         "Çalışma süresi",
     )
 
-    pomodoros = to_int(
+    pomodoros = optional_int(
         values["pomodoros"],
         "Pomodoro sayısı",
     )
 
-    if correct + wrong + blank != total:
+    topic = values["topic"].strip()
+
+    study_type = values["study_type"].strip()
+
+    difficulty = values["difficulty"].strip()
+
+    # Doğru sayısı toplamdan büyük olamaz.
+    if correct is not None and correct > total:
         raise ValueError(
-            "Doğru + yanlış + boş = toplam soru olmalı."
+            "Doğru sayısı toplam soru sayısından fazla olamaz."
         )
+
+    # Yanlış sayısı toplamdan büyük olamaz.
+    if wrong is not None and wrong > total:
+        raise ValueError(
+            "Yanlış sayısı toplam soru sayısından fazla olamaz."
+        )
+
+    # İki değer de biliniyorsa boş sayısını otomatik hesapla.
+    if correct is not None and wrong is not None:
+
+        answered = correct + wrong
+
+        if answered > total:
+            raise ValueError(
+                "Doğru + yanlış toplam soru sayısından fazla olamaz."
+            )
+
+        blank = total - answered
+
+    else:
+        # Bilgilerden biri eksikse boş sayısını
+        # güvenilir şekilde hesaplayamayız.
+        blank = None
 
     return {
         "event_id": event_id,
+
         "event_type": "question_session",
+
         "timestamp": timestamp,
-        "subject": values["subject"].strip(),
-        "topic": values["topic"].strip(),
-        "study_type": values["study_type"].strip(),
+
+        "subject": subject,
+
+        "topic": topic or None,
+
+        "study_type": study_type or None,
 
         "questions": {
             "total": total,
@@ -104,7 +222,7 @@ def build_event(
 
         "metadata": {
             "pomodoros": pomodoros,
-            "difficulty": values["difficulty"].strip(),
+            "difficulty": difficulty or None,
         },
     }
 
@@ -113,9 +231,20 @@ def main() -> None:
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--body", required=True)
-    parser.add_argument("--event-id", required=True)
-    parser.add_argument("--timestamp", required=True)
+    parser.add_argument(
+        "--body",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--event-id",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--timestamp",
+        required=True,
+    )
 
     args = parser.parse_args()
 
@@ -132,6 +261,7 @@ def main() -> None:
     )
 
     output_dir = Path("data/events")
+
     output_dir.mkdir(
         parents=True,
         exist_ok=True,
