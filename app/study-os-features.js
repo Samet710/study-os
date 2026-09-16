@@ -15,6 +15,8 @@
         script.src =
             `${file}?v=${Date.now()}`;
 
+        script.async = false;
+
         document.body.appendChild(script);
     });
 })();
