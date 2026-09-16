@@ -1,0 +1,170 @@
+.study-os-tab-hidden {
+    display: none !important;
+}
+
+
+.study-os-bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 14px;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(
+            520px,
+            calc(100% - 24px)
+        );
+
+    height: 68px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 4px;
+
+    padding: 7px;
+
+    z-index: 2000;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 23px;
+
+    background:
+        rgba(18,22,33,.78);
+
+    backdrop-filter:
+        blur(24px);
+
+    -webkit-backdrop-filter:
+        blur(24px);
+
+    box-shadow:
+        0 18px 50px
+        rgba(0,0,0,.35);
+}
+
+
+.study-os-nav-item {
+    position: relative;
+
+    border: 0;
+
+    border-radius: 17px;
+
+    background:
+        transparent;
+
+    color:
+        #8f98aa;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+
+.study-os-nav-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+.study-os-nav-item span {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.study-os-nav-item.active {
+    color: #f6f7fb;
+
+    background:
+        rgba(139,108,255,.16);
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(139,108,255,.12);
+}
+
+
+.study-os-nav-item.active svg {
+    color: #a997ff;
+}
+
+
+.study-os-nav-item:active {
+    transform:
+        scale(.94);
+}
+
+
+.study-os-settings-button {
+    display: none !important;
+}.dashboard {
+    padding-bottom:
+        110px !important;
+}
+
+
+@media (min-width: 801px) {
+
+    .study-os-bottom-nav {
+        width: 460px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .study-os-bottom-nav {
+
+        bottom: 10px;
+
+        width:
+            calc(100% - 20px);
+
+        height: 66px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .study-os-nav-item span {
+        font-size: 9px;
+    }
+
+
+    .study-os-nav-item svg {
+        width: 19px;
+        height: 19px;
+    }
+
+}
