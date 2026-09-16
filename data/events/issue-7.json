@@ -1,0 +1,19 @@
+{
+  "event_id": "issue-7",
+  "event_type": "question_session",
+  "timestamp": "2026-09-16T07:00:38Z",
+  "subject": "Kimya",
+  "topic": null,
+  "study_type": null,
+  "questions": {
+    "total": 22,
+    "correct": null,
+    "wrong": null,
+    "blank": null
+  },
+  "duration_minutes": null,
+  "metadata": {
+    "pomodoros": null,
+    "difficulty": null
+  }
+}

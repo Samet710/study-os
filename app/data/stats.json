@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-09-16T10:00:06.152946+03:00",
+  "generated_at": "2026-09-16T10:00:47.015130+03:00",
   "today": "2026-09-16",
   "daily_goal": 50,
   "totals": {
-    "questions": 40,
+    "questions": 62,
     "correct": 27,
     "wrong": 11,
     "blank": 2,
     "minutes": 60,
-    "xp": 410,
+    "xp": 630,
     "accuracy": 71.1,
     "level": 1
   },
   "today_stats": {
-    "questions": 40,
+    "questions": 62,
     "correct": 27,
     "minutes": 60,
-    "xp": 410
+    "xp": 630
   },
   "streak": 1,
   "subjects": {
@@ -37,19 +37,41 @@
       "minutes": 30,
       "xp": 200,
       "accuracy": 60.0
+    },
+    "Kimya": {
+      "questions": 22,
+      "correct": null,
+      "wrong": null,
+      "blank": null,
+      "minutes": null,
+      "xp": 220,
+      "accuracy": null
     }
   },
   "daily": {
     "2026-09-16": {
-      "questions": 40,
+      "questions": 62,
       "correct": 27,
       "minutes": 60,
-      "xp": 410,
+      "xp": 630,
       "correct_known": 2,
       "minutes_known": 2
     }
   },
   "recent_events": [
+    {
+      "event_id": "issue-7",
+      "timestamp": "2026-09-16T07:00:38Z",
+      "subject": "Kimya",
+      "topic": null,
+      "study_type": null,
+      "questions": 22,
+      "correct": null,
+      "wrong": null,
+      "blank": null,
+      "minutes": null,
+      "xp": 220
+    },
     {
       "event_id": "issue-6",
       "timestamp": "2026-09-16T06:54:58Z",
