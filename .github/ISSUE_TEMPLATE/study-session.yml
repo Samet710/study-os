@@ -12,112 +12,102 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 📚 Study Session
+        ## 📚 Yeni Çalışma
 
-        Bugünkü çalışmanı kaydet.
+        Yaptığın çalışmayı kaydet.
 
-        Verileri mümkün olduğunca doğru gir.
-        Study OS bu bilgilerden XP ve istatistiklerini hesaplayacak.
+        Sadece bildiğin bilgileri girmen yeterli.
+        Ek bilgileri boş bırakabilirsin.
 
   - type: input
     id: subject
     attributes:
-      label: Ders
+      label: 📚 Ders
       description: Hangi derste çalıştın?
       placeholder: "Örn: Matematik"
     validations:
       required: true
 
   - type: input
-    id: topic
-    attributes:
-      label: Konu
-      description: Hangi konuda çalıştın?
-      placeholder: "Örn: Parabol"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: study-type
-    attributes:
-      label: Çalışma türü
-      options:
-        - Soru Çözümü
-        - Konu Çalışması
-        - Tekrar
-        - Deneme
-    validations:
-      required: true
-
-  - type: input
     id: total
     attributes:
-      label: Toplam soru
+      label: 🔢 Toplam soru
       description: Kaç soru çözdün?
       placeholder: "Örn: 40"
-    validations:
-      required: true
-
-  - type: input
-    id: correct
-    attributes:
-      label: Doğru
-      description: Kaç doğru yaptın?
-      placeholder: "Örn: 32"
-    validations:
-      required: true
-
-  - type: input
-    id: wrong
-    attributes:
-      label: Yanlış
-      description: Kaç yanlış yaptın?
-      placeholder: "Örn: 8"
-    validations:
-      required: true
-
-  - type: input
-    id: blank
-    attributes:
-      label: Boş
-      description: Kaç soruyu boş bıraktın?
-      placeholder: "Örn: 0"
-      value: "0"
-    validations:
-      required: true
-
-  - type: input
-    id: duration
-    attributes:
-      label: Çalışma süresi
-      description: Dakika cinsinden yaz.
-      placeholder: "Örn: 55"
-    validations:
-      required: true
-
-  - type: input
-    id: pomodoros
-    attributes:
-      label: Pomodoro sayısı
-      description: Kaç Pomodoro yaptın?
-      placeholder: "Örn: 2"
-      value: "0"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: difficulty
-    attributes:
-      label: Zorluk
-      options:
-        - Kolay
-        - Normal
-        - Zor
     validations:
       required: true
 
   - type: markdown
     attributes:
       value: |
+        ### Ek bilgiler
+
+        Aşağıdaki bilgileri biliyorsan girebilirsin.
+        Hiçbirini doldurmak zorunda değilsin.
+
+  - type: input
+    id: topic
+    attributes:
+      label: 📖 Konu
+      description: İstersen çalıştığın konuyu belirt.
+      placeholder: "Örn: Parabol"
+
+  - type: input
+    id: correct
+    attributes:
+      label: ✅ Doğru
+      description: Biliyorsan doğru sayısını yaz.
+      placeholder: "Örn: 32"
+
+  - type: input
+    id: wrong
+    attributes:
+      label: ❌ Yanlış
+      description: Biliyorsan yanlış sayısını yaz.
+      placeholder: "Örn: 8"
+
+  - type: input
+    id: duration
+    attributes:
+      label: ⏱️ Süre
+      description: Biliyorsan kaç dakika çalıştığını yaz.
+      placeholder: "Örn: 55"
+
+  - type: input
+    id: pomodoros
+    attributes:
+      label: 🍅 Pomodoro
+      description: Biliyorsan kaç Pomodoro yaptığını yaz.
+      placeholder: "Örn: 2"
+
+  - type: dropdown
+    id: study-type
+    attributes:
+      label: 📝 Çalışma türü
+      description: İstersen çalışma türünü belirt.
+      options:
+        - Soru Çözümü
+        - Konu Çalışması
+        - Tekrar
+        - Deneme
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: 🎚️ Zorluk
+      description: İstersen çalışmanın zorluğunu belirt.
+      options:
+        - Kolay
+        - Normal
+        - Zor
+
+  - type: markdown
+    attributes:
+      value: |
         ---
-        💡 Gönderdiğinde GitHub Actions kaydı otomatik olarak Study OS'a işleyecek.
+
+        💡 **Boş bıraktığın bilgiler sorun değil.**
+
+        Study OS yalnızca verdiğin bilgiler üzerinden hesaplama yapacaktır.
+
+        Kaydı gönderdiğinde GitHub Actions otomatik olarak işleyecektir.
